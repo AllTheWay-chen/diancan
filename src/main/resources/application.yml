@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: diancan
+  datasource:
+    url: jdbc:mysql://localhost:3306/cxl_diancan?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: xiaolong
+    driver-class-name: com.mysql.jdbc.Driver
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+
+server:
+  port: 8039
+
+logging:
+  config: classpath:logging/logback.xml
+  level:
+    com.cxl.mapper: debug
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
