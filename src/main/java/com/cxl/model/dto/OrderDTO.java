@@ -1,12 +1,13 @@
 package com.cxl.model.dto;
 
+import com.cxl.model.basic.BasicInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @program: diancan
@@ -18,10 +19,10 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderDTO implements Serializable{
+public class OrderDTO implements Serializable {
 
     /**
-     * 产品列表,k：订单号、v：数量
+     * 产品列表,id：产品序号、num：数量
      */
-    private Map<Integer,Integer> productMap;
+    private List<BasicInfo> productList;
 }

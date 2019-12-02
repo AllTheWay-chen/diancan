@@ -3,14 +3,28 @@ spring:
     name: diancan
   datasource:
     url: jdbc:mysql://localhost:3306/cxl_diancan?useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: xiaolong
+    username: ifenxi
+    password: ifenxi001
     driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      min-idle: 1
+      max-active: 20
+      test-on-borrow: true
   http:
     encoding:
       charset: UTF-8
       force: true
       enabled: true
+  redis:
+    password: 123456
+    port: 6379
+    timeout: 5000
+    pool:
+      max-idle: 50
+      min-idle: 8
+      max-active: 500
+      max-wait: 5000
+    host: localhost
 
 server:
   port: 8039
@@ -22,3 +36,4 @@ logging:
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
+

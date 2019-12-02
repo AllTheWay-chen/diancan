@@ -24,7 +24,7 @@ public class ProductApi {
     @GetMapping(value = "/list")
     @ResponseStatus(HttpStatus.OK)
     public PageVO<ProductVO> getProductList(
-            PageQO pageQO) {
-        return productService.getProductList(pageQO.getPageNum(), pageQO.getPageSize());
+            PageQO pageQo) {
+        return productService.getProductList(pageQo.getPageNum(), pageQo.getPageSize());
     }
 }

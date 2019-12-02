@@ -1,5 +1,6 @@
 package com.cxl.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class OrderVO implements Serializable{
     /**
      * 下单时间
      */
+    @JsonFormat(pattern = "YYYY-MM-dd HH:mm", timezone = "GMT+8")
     private Date addTime;
 
     /**

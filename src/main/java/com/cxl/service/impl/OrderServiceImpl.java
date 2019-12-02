@@ -4,6 +4,7 @@ import com.cxl.mapper.OrderInfoMapper;
 import com.cxl.mapper.ProductMapper;
 import com.cxl.model.OrderInfo;
 import com.cxl.model.Product;
+import com.cxl.model.basic.BasicInfo;
 import com.cxl.model.dto.OrderDTO;
 import com.cxl.model.vo.OrderVO;
 import com.cxl.service.OrderService;
@@ -12,6 +13,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.Date;
@@ -36,15 +38,17 @@ public class OrderServiceImpl implements OrderService {
 
     private static Long total = 0L;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Integer addOrder(OrderDTO orderDTO) {
-        Map<Integer, Integer> productMap = orderDTO.getProductMap();
-        Integer userId = (Integer) RequestContextHolder.getRequestAttributes().getAttribute("UserId", 0);
-        if (null != productMap && !productMap.isEmpty()) {
-            productMap.forEach((k, v) -> {
-                Product product = productMapper.selectByPrimaryKey(k);
+        List<BasicInfo> list = orderDTO.getProductList();
+//        Integer userId = (Integer) RequestContextHolder.getRequestAttributes().getAttribute("UserId", 0);
+        Integer userId = 1;
+        if (null != list && !list.isEmpty()) {
+            list.forEach(basicInfo -> {
+                Product product = productMapper.selectByPrimaryKey(basicInfo.getId());
                 if (null != product) {
-                    total += product.getPrice() * v;
+                    total += product.getPrice() * basicInfo.getNum();
                 }
             });
             OrderInfo orderInfo = OrderInfo.builder()

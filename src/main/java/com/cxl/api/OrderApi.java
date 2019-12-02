@@ -26,6 +26,7 @@ public class OrderApi {
     @PostMapping(value = "/add")
     @ResponseStatus(HttpStatus.OK)
     public Integer addOrder(
+            @RequestBody
             OrderDTO orderDTO) {
         return orderService.addOrder(orderDTO);
     }
